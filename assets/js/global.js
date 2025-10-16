@@ -2,7 +2,7 @@
 
 let menuToggle = document.getElementsByClassName("menu-toggle");
 let mobileMenu = document.getElementById('site-navigation-mobile');
-let mainContent = document.getElementById('content');
+let mainContent = document.getElementById('page');
 let menuContainer = document.querySelector('.menu-main-menu-container'); // Select the menu container
 
 let mobileNav = function() {

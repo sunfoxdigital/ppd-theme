@@ -1,7 +1,5 @@
 /* Theme Styling for Global Elements (header, footer, basic components) */
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,500;0,600;0,700;1,300;1,500;1,600;1,700&family=Raleway:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap');
-
 :root {
     --primary-color: #212F31;
     --secondary-color: #ae4242;
@@ -425,19 +423,19 @@ input {
 }
 
 @media(max-width:979px){
-    #content {
+    #page {
         /* filter: blur(0px); */
         transition: .2s ease-in-out;
     }
 
-    #content.mobile-nav-open {
+    #page.mobile-nav-open {
         filter: blur(2px);
         position: fixed;
         /* top: -5px; */
         z-index: 1;
     }
 
-    #content.mobile-nav-open:after {
+    #page.mobile-nav-open:after {
         content: "";
         position: absolute;
         top: 0;
@@ -666,11 +664,13 @@ input {
     color: #3344DD !important;
 }
 
+/* /HACK */
+
 #main__top {
     position: sticky;
     bottom: 0;
     right: 0;
-    transform: translateX(20px);
+    /* transform: translateX(20px); */
     opacity: 0;
     transition: .2s .2s ease-in-out;
     z-index: 9;
@@ -678,7 +678,7 @@ input {
 
 #main__top.active {
     opacity: 1;
-    transform: translateX(0);
+    /* transform: translateX(0); */
 }
 
 #main__top a {
@@ -713,6 +713,7 @@ input {
 
 #content {
     margin-top: 80px;
+    width: 100%;
 }
 
 /* ******* Section-Main Styles End ******* */

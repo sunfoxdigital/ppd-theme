@@ -33,35 +33,36 @@
 			<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NHBJFLG8"
 			height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<!-- End Google Tag Manager (noscript) -->
-		<div id="page" class="site">
-			<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'planpackdiscover' ); ?></a>
+		<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'planpackdiscover' ); ?></a>
 
-			<header id="masthead" class="site-header">
-				<div class="header-content">
-					<?php the_custom_logo(); ?>
-					<nav id="site-navigation" class="main-navigation mobile-hide-block">
-						<?php
-						wp_nav_menu(
-							array(
-								'theme_location' => 'menu-1',
-								'menu_id'        => 'primary-menu',
-							)
-						);
-						?>
-					</nav>
-					<nav id="site-navigation-mobile" class="main-navigation mobile-nav desktop-hide-block">
-						<?php
-						wp_nav_menu(
-							array(
-								'theme_location' => 'menu-1',
-								'menu_id'        => 'primary-menu',
-							)
-						);
-						?>
-						<img src="/wp-content/themes/planpackdiscover/assets/svg/menu-toggle-open.svg" class="menu-toggle menu-open-icon" width="18" height="100%" alt="Standard three bar hamburger menu open icon">
-						<img src="/wp-content/themes/planpackdiscover/assets/svg/menu-toggle-close.svg" class="menu-toggle menu-close-icon" width="15" height="100%" alt="Standard three bar hamburger menu close icon">
-					</nav>
-				</div>
-			</header>
+		<header id="masthead" class="site-header">
+			<div class="header-content">
+				<?php the_custom_logo(); ?>
+				<nav id="site-navigation" class="main-navigation mobile-hide-block">
+					<?php
+					wp_nav_menu(
+						array(
+							'theme_location' => 'menu-1',
+							'menu_id'        => 'primary-menu',
+						)
+					);
+					?>
+				</nav>
+				<nav id="site-navigation-mobile" class="main-navigation mobile-nav desktop-hide-block">
+					<?php
+					wp_nav_menu(
+						array(
+							'theme_location' => 'menu-1',
+							'menu_id'        => 'primary-menu',
+						)
+					);
+					?>
+					<img src="/wp-content/themes/planpackdiscover/assets/svg/menu-toggle-open.svg" class="menu-toggle menu-open-icon" width="18" height="100%" alt="Standard three bar hamburger menu open icon">
+					<img src="/wp-content/themes/planpackdiscover/assets/svg/menu-toggle-close.svg" class="menu-toggle menu-close-icon" width="15" height="100%" alt="Standard three bar hamburger menu close icon">
+				</nav>
+			</div>
+		</header>
+		
+		<div id="page" class="site">
 
 			<main id="content">

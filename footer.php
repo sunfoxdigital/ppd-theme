@@ -1,9 +1,9 @@
 			<?php
-			echo '<div id=main__top>';
-			echo '<a href="#content">';
-			get_template_part( 'template-parts/svg/arrow-up' );
-			echo '</a>';
-			echo '</div>';
+				echo '<div id=main__top>';
+				echo '<a href="#content">';
+				get_template_part( 'template-parts/svg/arrow-up' );
+				echo '</a>';
+				echo '</div>';
 			?>
 			
 			</main>

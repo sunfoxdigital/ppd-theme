@@ -7,7 +7,7 @@ $encoded_url = urlencode( $current_url );
 $facebook_follow    = "https://www.facebook.com/profile.php?id=100095139456212";
 $instagram_follow   = "https://www.instagram.com/planpackdiscover/";
 $tiktok_follow   = "https://www.tiktok.com/@planpackdiscover";
-$twitter_follow   = "https://www.instagram.com/planpackdiscover/";
+$twitter_follow   = "https://x.com/plnpckdiscover";
 
 
 ?>
