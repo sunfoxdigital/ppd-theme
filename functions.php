@@ -108,38 +108,6 @@ function planpackdiscover_content_width() {
 add_action( 'after_setup_theme', 'planpackdiscover_content_width', 0 );
 
 /**
- * Register widget area.
- *
- * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
- */
-// function planpackdiscover_widgets_init() {
-// 	register_sidebar(
-// 		array(
-// 			'name'          => esc_html__( 'Post Sidebar', 'planpackdiscover' ),
-// 			'id'            => 'sidebar-1',
-// 			'description'   => esc_html__( 'Add widgets here.', 'planpackdiscover' ),
-// 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-// 			'after_widget'  => '</section>',
-// 			'before_title'  => '<h2 class="widget-title">',
-// 			'after_title'   => '</h2>',
-// 		)
-// 	);
-
-// 	register_sidebar(
-// 		array(
-// 			'name'          => esc_html__( 'Post Teasers', 'planpackdiscover' ),
-// 			'id'            => 'post-teasers',
-// 			'description'   => esc_html__( 'Add widgets here.', 'planpackdiscover' ),
-// 			'before_widget' => '<div id="%1$s">',
-// 			'after_widget'  => '</div>',
-// 			'before_title'  => '<h2>',
-// 			'after_title'   => '</h2>',
-// 		)
-// 	);
-// }
-// add_action( 'widgets_init', 'planpackdiscover_widgets_init' );
-
-/**
  * Enqueue scripts and styles.
  */
 function planpackdiscover_scripts() {
@@ -148,6 +116,7 @@ function planpackdiscover_scripts() {
 
 	wp_enqueue_style( 'global-stylesheet', get_stylesheet_directory_uri() . '/dist/css/global.min.css', [], _S_VERSION );
 	wp_enqueue_script( 'global-functions', get_template_directory_uri() . '/dist/js/global.min.js', array(), _S_VERSION, true );
+	wp_script_add_data( 'global-functions', 'strategy', 'defer' );
 
 	if( is_front_page() ) {
 		wp_enqueue_style( 'front-page-styles', get_stylesheet_directory_uri() . '/dist/css/front-page.min.css', [], _S_VERSION );
@@ -157,6 +126,8 @@ function planpackdiscover_scripts() {
 	if( is_single() ) {
 		wp_enqueue_style( 'post-styles', get_stylesheet_directory_uri() . '/dist/css/single.min.css', [], _S_VERSION );
 		wp_enqueue_script( 'post-functions', get_template_directory_uri() . '/dist/js/single.min.js', array(), _S_VERSION, true );
+		wp_script_add_data( 'post-functions', 'strategy', 'defer' );
+
 	}
 
 	if( is_home() || is_category() || is_archive() || is_single() ) {
@@ -176,6 +147,7 @@ function planpackdiscover_scripts() {
 	
 	if( is_home() || is_category() || is_singular('post') ) {
 		wp_enqueue_script( 'load-more', get_template_directory_uri() . '/dist/js/load-more.min.js', array(), _S_VERSION, true );
+		wp_script_add_data( 'load-more', 'strategy', 'defer' );
 		wp_localize_script(	'load-more', 'ppdData',
 			array(
 				'ajax_url' => admin_url( 'admin-ajax.php' ),
@@ -420,3 +392,55 @@ function custom_mce_colors($init) {
 }
 
 add_filter('tiny_mce_before_init', 'custom_mce_colors');
+
+/**
+ * Enable SVG Support in TinyMCE
+ */
+
+/**
+ * WP Head Cleanup
+ */
+function ppd_cleanup_head() {
+	// Emojis.
+	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+	remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+	remove_action( 'wp_print_styles', 'print_emoji_styles' );
+	remove_action( 'admin_print_styles', 'print_emoji_styles' );
+	remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+	remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
+	remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+
+	// RSD + WLW + shortlink + generator.
+	remove_action( 'wp_head', 'rsd_link' );
+	remove_action( 'wp_head', 'wlwmanifest_link' );
+	remove_action( 'wp_head', 'wp_shortlink_wp_head', 10, 0 );
+	remove_action( 'wp_head', 'wp_generator' );
+
+	// REST + oEmbed discovery (keeps embeds working when you paste URLs INTO your site).
+	remove_action( 'wp_head', 'rest_output_link_wp_head', 10 );
+	remove_action( 'wp_head', 'wp_oembed_add_discovery_links', 10 );
+}
+add_action( 'init', 'ppd_cleanup_head' );
+
+/**
+ * Dequeue dashicons on the front end for non-logged-in users.
+ */
+function ppd_remove_dashicons_for_guests() {
+	if ( ! is_user_logged_in() ) {
+		wp_deregister_style( 'dashicons' );
+	}
+}
+add_action( 'wp_enqueue_scripts', 'ppd_remove_dashicons_for_guests' );
+
+/**
+ * Optionally dequeue block library CSS on the front end.
+ * TEST this carefully; re-enable if anything looks off.
+ */
+function ppd_maybe_remove_block_library_css() {
+	if ( ! is_admin() ) {
+		wp_dequeue_style( 'wp-block-library' );
+		wp_dequeue_style( 'wp-block-library-theme' );
+		wp_dequeue_style( 'global-styles' ); // theme.json output
+	}
+}
+add_action( 'wp_enqueue_scripts', 'ppd_maybe_remove_block_library_css', 100 );

@@ -12,7 +12,7 @@
 				<div class="container">
 					<div class="footer-logo">
 						<?php echo wp_get_attachment_image( 872, 'Large', '', array('class' => '') ); ?>
-						<h5>Adventure awaits,<br>but preparation comes first.</h5>
+						<p class="tagline">Adventure awaits,<br>but preparation comes first.</p>
 					</div>
 					<div class="footer-menu">
 						<h4>Discover</h4>
