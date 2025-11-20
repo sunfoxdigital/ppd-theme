@@ -24,6 +24,13 @@
 		<meta charset="<?php bloginfo( 'charset' ); ?>">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="profile" href="https://gmpg.org/xfn/11">
+
+		<link rel="preload" as="font" type="font/woff2" crossorigin
+			href="<?php echo get_template_directory_uri(); ?>/assets/fonts/montserrat/Montserrat-VariableFont_wght.woff2">
+
+		<link rel="preload" as="font" type="font/woff2" crossorigin
+			href="<?php echo get_template_directory_uri(); ?>/assets/fonts/raleway/Raleway-VariableFont_wght.woff2">
+
 		<?php wp_head(); ?>
 	</head>
 
@@ -38,7 +45,7 @@
 		<header id="masthead" class="site-header">
 			<div class="header-content">
 				<?php the_custom_logo(); ?>
-				<nav id="site-navigation" class="main-navigation mobile-hide-block">
+				<nav id="site-navigation" class="main-navigation" aria-label="Primary Navigation">
 					<?php
 					wp_nav_menu(
 						array(
@@ -47,18 +54,20 @@
 						)
 					);
 					?>
-				</nav>
-				<nav id="site-navigation-mobile" class="main-navigation mobile-nav desktop-hide-block">
-					<?php
-					wp_nav_menu(
-						array(
-							'theme_location' => 'menu-1',
-							'menu_id'        => 'primary-menu',
-						)
-					);
-					?>
-					<img src="/wp-content/themes/planpackdiscover/assets/svg/menu-toggle-open.svg" class="menu-toggle menu-open-icon" width="18" height="100%" alt="Standard three bar hamburger menu open icon">
-					<img src="/wp-content/themes/planpackdiscover/assets/svg/menu-toggle-close.svg" class="menu-toggle menu-close-icon" width="15" height="100%" alt="Standard three bar hamburger menu close icon">
+				<button 
+					class="menu-toggle menu-open-icon desktop-hide-inline"
+					aria-label="Open menu"
+				>
+					<?php get_template_part( 'template-parts/svg/menu-toggle-open' ); ?>
+				</button>
+
+				<button 
+					class="menu-toggle menu-close-icon desktop-hide-inline"
+					aria-label="Close menu"
+				>
+					<?php get_template_part( 'template-parts/svg/menu-toggle-close' ); ?>
+				</button>
+	
 				</nav>
 			</div>
 		</header>

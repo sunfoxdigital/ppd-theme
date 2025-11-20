@@ -153,19 +153,15 @@ function planpackdiscover_scripts() {
 				'ajax_url' => admin_url( 'admin-ajax.php' ),
 			)
 		);
-	};	
+	};
+
+	if ( !is_admin() ) {
+        wp_dequeue_script('jquery');
+        wp_deregister_script('jquery');
+        wp_dequeue_script('jquery-migrate');
+    }
 }
 add_action( 'wp_enqueue_scripts', 'planpackdiscover_scripts' );
-
-function planpackdiscover_fonts() {
-    ?>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,500;0,600;0,700;1,300;1,500;1,600;1,700&family=Raleway:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet">
-    <?php
-}
-add_action('wp_head', 'planpackdiscover_fonts');
-
 
 /**
  * Custom template tags for this theme.
@@ -444,3 +440,26 @@ function ppd_maybe_remove_block_library_css() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'ppd_maybe_remove_block_library_css', 100 );
+
+/**
+ * Improve LCP by overriding attributes on the hero image.
+ */
+function ppd_optimize_hero_lcp( $attr, $attachment, $size ) {
+
+    if ( is_front_page() && $size === 'full' ) {
+        $attr['loading'] = 'eager';
+        $attr['decoding'] = 'async';
+        $attr['fetchpriority'] = 'high';
+    }
+
+    return $attr;
+}
+add_filter( 'wp_get_attachment_image_attributes', 'ppd_optimize_hero_lcp', 10, 3 );
+
+function ppd_hero_correct_sizes( $sizes, $size, $image_src, $image_meta, $attachment_id ) {
+    if ( is_front_page() ) {
+        return '(max-width: 1199px) 100vw, 1199px';
+    }
+    return $sizes;
+}
+add_filter( 'wp_calculate_image_sizes', 'ppd_hero_correct_sizes', 10, 5 );

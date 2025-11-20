@@ -1,6 +1,6 @@
 			<?php
 				echo '<div id=main__top>';
-				echo '<a href="#content">';
+				echo '<a href="#content" aria-label="Scroll to top" class="scroll-to-top">';
 				get_template_part( 'template-parts/svg/arrow-up' );
 				echo '</a>';
 				echo '</div>';

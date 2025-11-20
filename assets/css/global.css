@@ -24,6 +24,38 @@
     --paragraph-font: 'Raleway', open-sans;
 }
 
+@font-face {
+  font-family: "Montserrat";
+  src: url("/wp-content/themes/planpackdiscover/assets/fonts/montserrat/Montserrat-VariableFont_wght.woff2") format("woff2-variations");
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/wp-content/themes/planpackdiscover/assets/fonts/montserrat/Montserrat-Italic-VariableFont_wght.woff2") format("woff2-variations");
+  font-weight: 300 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Raleway";
+  src: url("/wp-content/themes/planpackdiscover/assets/fonts/raleway/Raleway-VariableFont_wght.woff2") format("woff2-variations");
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Raleway";
+  src: url("/wp-content/themes/planpackdiscover/assets/fonts/raleway/Raleway-Italic-VariableFont_wght.woff2") format("woff2-variations");
+  font-weight: 400 600;
+  font-style: italic;
+  font-display: swap;
+}
+
 *, html, body {
     -webkit-font-smoothing: antialiased;
     scroll-behavior: smooth;
@@ -424,7 +456,6 @@ input {
 
 @media(max-width:979px){
     #page {
-        /* filter: blur(0px); */
         transition: .2s ease-in-out;
     }
 
@@ -468,7 +499,7 @@ input {
         transition: .2s ease-in-out;
     }
     
-    #site-navigation-mobile .menu {
+    #site-navigation .menu {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -479,7 +510,14 @@ input {
         font-size: 24px;
     }
 
-    #site-navigation-mobile .menu li {
+    #site-navigation .menu-toggle {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+    }
+
+    #site-navigation .menu li {
         width: 100%;
         max-width: 375px;
         margin: auto;
@@ -487,12 +525,12 @@ input {
         transition: 0s;
     }
 
-    #site-navigation-mobile .menu li:active {
+    #site-navigation .menu li:active {
         background-color: var(--accent-yellow);
         border-radius: 5px;
     }
 
-    #site-navigation-mobile .menu li:active a {
+    #site-navigation .menu li:active a {
         color: var(--primary-color);
         font-weight: 600;
     }
@@ -501,11 +539,11 @@ input {
         background-color: transparent !important;
     }
 
-    #site-navigation-mobile .menu a {
+    #site-navigation .menu a {
         display: inline-block;
         padding: 10px;
         font-size: 16px;
-        font-weight: 400;
+        font-weight: 500;
         
     }
 
@@ -517,24 +555,24 @@ input {
         font-weight: 700 !important;
     }
 
-    #site-navigation-mobile.mobile-nav-open .menu-main-menu-container {
+    #site-navigation.mobile-nav-open .menu-main-menu-container {
         opacity: 1;
         transform: translateX(0);
     }
 
-    #site-navigation-mobile .menu-close-icon {
+    #site-navigation .menu-close-icon {
         display: none;
     }
     
-    #site-navigation-mobile.mobile-nav-open .menu-close-icon {
+    #site-navigation.mobile-nav-open .menu-close-icon {
         display: block;
     }
     
-    #site-navigation-mobile .menu-open-icon {
+    #site-navigation .menu-open-icon {
         display: block;
     }
     
-    #site-navigation-mobile.mobile-nav-open .menu-open-icon {
+    #site-navigation.mobile-nav-open .menu-open-icon {
         display: none;
     }
     
@@ -550,13 +588,13 @@ input {
 }
 
 @media(min-width:767px) and (max-width:979px){
-    #site-navigation-mobile .menu-main-menu-container {
+    #site-navigation .menu-main-menu-container {
         top: 80px;
     }
 }
 
 @media(max-width:350px) or (max-height: 650px){
-    #site-navigation-mobile .menu-main-menu-container {
+    #site-navigation .menu-main-menu-container {
         width: 100vw;
         height: calc(100vh - 47px);
         min-height: unset;
@@ -566,7 +604,7 @@ input {
         transition: .3s;
     }
 
-    #site-navigation-mobile .menu {
+    #site-navigation .menu {
         flex-direction: column;
     }
 }
@@ -605,7 +643,6 @@ input {
 }
 
 #site-navigation {
-    /* width: 100%; */
     margin-left: 24px;
 }
 
@@ -621,6 +658,7 @@ input {
 .main-navigation .menu a {
     font-family: var(--title-font);
     font-size: 14px;
+    font-weight: 500;
     padding: 8px 16px;
 }
 
@@ -630,11 +668,17 @@ input {
     padding: 12px 24px;
     width: 125px;
     font-size: 12px;
+    font-weight: 700;
 }
 
 #masthead .cta-button:hover {
     background-color: var(--cta-color-orange);
     border-color: var(--cta-color-orange);
+}
+
+.tp__app-controls {
+    padding: 0;
+    list-style: none;
 }
 
 @media(min-width:768px){

@@ -1,9 +1,7 @@
-// Mobile Menu - Hide/Show
-
 let menuToggle = document.getElementsByClassName("menu-toggle");
-let mobileMenu = document.getElementById('site-navigation-mobile');
+let mobileMenu = document.getElementById('site-navigation');
 let mainContent = document.getElementById('page');
-let menuContainer = document.querySelector('.menu-main-menu-container'); // Select the menu container
+let menuContainer = document.querySelector('.menu-main-menu-container');
 
 let mobileNav = function() {
     mobileMenu.classList.toggle("mobile-nav-open");
@@ -11,7 +9,7 @@ let mobileNav = function() {
 };
 
 let closeMenuOnClickOutside = function(event) {
-    if (!menuContainer.contains(event.target) && !event.target.classList.contains('menu-toggle')) {
+    if (!menuContainer.contains(event.target) && !event.target.closest('.menu-toggle')) {
         mobileMenu.classList.remove("mobile-nav-open");
         mainContent.classList.remove("mobile-nav-open");
     }
