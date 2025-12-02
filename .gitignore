@@ -1,0 +1,2 @@
+# Ignore node modules anywhere in the repo
+**/node_modules/
