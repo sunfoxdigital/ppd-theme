@@ -646,6 +646,11 @@ input {
     margin-left: 24px;
 }
 
+#site-navigation .menu-main-menu-container {
+    display: flex;
+    align-items: center;
+}
+
 .main-navigation .menu {
     display: flex;
     justify-content: end;
@@ -655,7 +660,8 @@ input {
     line-height: 1;
 }
 
-.main-navigation .menu a {
+.main-navigation .menu a,
+.menu-item.tp__menu-item--sign-up a {
     font-family: var(--title-font);
     font-size: 14px;
     font-weight: 500;

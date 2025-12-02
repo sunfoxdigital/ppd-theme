@@ -46,14 +46,21 @@
 			<div class="header-content">
 				<?php the_custom_logo(); ?>
 				<nav id="site-navigation" class="main-navigation" aria-label="Primary Navigation">
+					<div class="menu-main-menu-container">
 					<?php
 					wp_nav_menu(
 						array(
 							'theme_location' => 'menu-1',
 							'menu_id'        => 'primary-menu',
+							'container'      => false,
 						)
 					);
+
+					if ( function_exists('generate_wppd_menu') ) :
+            			echo generate_wppd_menu();
+        			endif;
 					?>
+					</div>
 				<button 
 					class="menu-toggle menu-open-icon desktop-hide-inline"
 					aria-label="Open menu"
