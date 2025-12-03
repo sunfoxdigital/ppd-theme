@@ -26,11 +26,11 @@
 			</div>
 			<div class="post__hero-content--image">
 				<?php
-				if( has_post_thumbnail() ) {
-					the_post_thumbnail();
+				if ( has_post_thumbnail() ) {
+					ppd_render_hero_image( get_post_thumbnail_id() );
 				} else {
-					echo wp_get_attachment_image( 216, 'full', '', array('class' => '') );
-				}; 
+					ppd_render_hero_image( 216 );
+				};
 				?>
 			</div>
 		</div>

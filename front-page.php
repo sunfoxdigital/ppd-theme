@@ -1,21 +1,6 @@
 <?php 
 get_header(); 
 $hero_id = get_post_thumbnail_id();
-$hero_src = wp_get_attachment_image_url( $hero_id, 'full' );
-$hero_src_1200 = wp_get_attachment_image_url( $hero_id, 'large' );
-$hero_webp = wp_get_attachment_image_url( $hero_id, 'full' );
-
-if ( $hero_webp ) {
-    $potential_webp = preg_replace('/\.(jpe?g|png)$/i', '.webp', $hero_webp);
-    // check if the WebP file exists on disk
-    $webp_path = str_replace( wp_get_upload_dir()['baseurl'], wp_get_upload_dir()['basedir'], $potential_webp );
-
-    $hero_webp = file_exists( $webp_path ) ? $potential_webp : false;
-}
-
-$hero_meta = wp_get_attachment_metadata( $hero_id );
-$hero_width = $hero_meta['width'] ?? 1200;
-$hero_height = $hero_meta['height'] ?? 800;
 ?>
 
 <?php if( have_rows('hero_content') ): while( have_rows('hero_content') ): the_row(); ?>
@@ -27,28 +12,7 @@ $hero_height = $hero_meta['height'] ?? 800;
                 <?php if(get_sub_field('cta_button')) { ?><a href="/app" class="cta-button"><?php echo get_sub_field('cta_button');?></a><?php }; ?>
             </div>
             <div class="hero__image">
-                <picture>
-                    <?php if ( $hero_webp ) : ?>
-                        <source
-                            srcset="<?php echo esc_url( $hero_webp ); ?>"
-                            type="image/webp"
-                            sizes="(max-width: 1199px) 100vw, 1199px">
-                    <?php endif; ?>
-
-                    <img
-                        src="<?php echo esc_url( $hero_src_1200 ); ?>"
-                        srcset="<?php echo esc_url( $hero_src_1200 ); ?> 1200w,
-                                <?php echo esc_url( $hero_src ); ?> 2000w"
-                        sizes="(max-width: 1199px) 100vw, 1199px"
-                        alt="<?php echo esc_attr( get_the_title() ); ?>"
-                        fetchpriority="high"
-                        decoding="async"
-                        loading="eager"
-                        width="<?php echo esc_attr( $hero_width ); ?>"
-                        height="<?php echo esc_attr( $hero_height ); ?>"
-                        class="hero-image"
-                    />
-                </picture>
+                <?php ppd_render_hero_image( $hero_id ); ?>
             </div>
         </div>
     </section>

@@ -463,3 +463,50 @@ function ppd_hero_correct_sizes( $sizes, $size, $image_src, $image_meta, $attach
     return $sizes;
 }
 add_filter( 'wp_calculate_image_sizes', 'ppd_hero_correct_sizes', 10, 5 );
+
+function ppd_render_hero_image( $image_id ) {
+
+    if (!$image_id) return;
+
+    // Base image URLs
+    $hero_src_full  = wp_get_attachment_image_url( $image_id, 'full' );
+    $hero_src_large = wp_get_attachment_image_url( $image_id, 'large' );
+
+    // Extract metadata
+    $hero_meta = wp_get_attachment_metadata( $image_id );
+    $hero_width  = $hero_meta['width']  ?? 1200;
+    $hero_height = $hero_meta['height'] ?? 800;
+
+    // Attempt WebP conversion
+    $potential_webp = preg_replace('/\.(jpe?g|png)$/i', '.webp', $hero_src_full);
+    $upload_dir = wp_get_upload_dir();
+    $webp_path  = str_replace($upload_dir['baseurl'], $upload_dir['basedir'], $potential_webp);
+
+    $hero_webp = file_exists($webp_path) ? $potential_webp : false;
+
+    ?>
+
+    <picture>
+        <?php if ($hero_webp): ?>
+            <source
+                srcset="<?php echo esc_url($hero_webp); ?>"
+                type="image/webp"
+                sizes="(max-width: 1199px) 100vw, 1199px">
+        <?php endif; ?>
+
+        <img
+            src="<?php echo esc_url($hero_src_large); ?>"
+            srcset="<?php echo esc_url($hero_src_large); ?> 1200w,
+                    <?php echo esc_url($hero_src_full); ?> 2000w"
+            sizes="(max-width: 1199px) 100vw, 1199px"
+            alt="<?php echo esc_attr(get_the_title($image_id)); ?>"
+            decoding="async"
+            loading="eager"
+            width="<?php echo esc_attr($hero_width); ?>"
+            height="<?php echo esc_attr($hero_height); ?>"
+        />
+
+    </picture>
+
+    <?php
+}
