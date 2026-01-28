@@ -1,6 +1,7 @@
 <?php 
 get_header(); 
 $hero_id = get_post_thumbnail_id();
+$cta_options = get_field('cta_button', 'option');
 ?>
 
 <?php if( have_rows('hero_content') ): while( have_rows('hero_content') ): the_row(); ?>
@@ -9,7 +10,7 @@ $hero_id = get_post_thumbnail_id();
             <div class="hero__content">
                 <?php if(get_sub_field('title')) { ?><h1><?php echo get_sub_field('title'); ?></h1><?php }; ?>
                 <?php if(get_sub_field('subtitle')) { ?><p class="subtitle"><?php echo get_sub_field('subtitle'); ?></p><?php }; ?>
-                <?php if(get_sub_field('cta_button')) { ?><a href="/app" class="cta-button"><?php echo get_sub_field('cta_button');?></a><?php }; ?>
+                <?php if(get_sub_field('cta_button')) { ?><a href="<?php echo $cta_options['page']; ?>" class="cta-button"><?php echo get_sub_field('cta_button');?></a><?php }; ?>
             </div>
             <div class="hero__image">
                 <?php ppd_render_hero_image( $hero_id ); ?>
