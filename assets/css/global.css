@@ -553,6 +553,7 @@ input {
         max-width: 300px;
         padding: 16px 10px !important;
         font-weight: 700 !important;
+        font-size: 14px !important;
     }
 
     #site-navigation.mobile-nav-open .menu-main-menu-container {
